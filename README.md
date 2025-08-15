@@ -91,3 +91,4 @@ The application follows Fountain's luxury monochrome design system:
 - Playfair Display for the logo
 - Elegant shadows and smooth transitions
 - Minimalist layout with purposeful whitespace# upload_frontend
+# upload_frontend
