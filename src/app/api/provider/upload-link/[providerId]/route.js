@@ -1,13 +1,12 @@
 import { NextResponse } from 'next/server'
-
-const BACKEND_API_URL = process.env.BACKEND_API_URL || 'http://localhost:8000'
+import { getBackendUrl, isDevMockMode, API_ENDPOINTS } from '@/lib/api-config'
 
 export async function GET(request, { params }) {
   try {
     const { providerId } = params
     
     // For testing without backend, return a mock token
-    if (BACKEND_API_URL === 'http://localhost:8000') {
+    if (isDevMockMode()) {
       const token = `test-upload-token-${providerId}-${Date.now()}`
       return NextResponse.json({
         token: token,
@@ -16,7 +15,9 @@ export async function GET(request, { params }) {
     }
     
     // Forward the request to the backend API
-    const response = await fetch(`${BACKEND_API_URL}/provider/upload-link/${providerId}`, {
+    const backendUrl = getBackendUrl()
+    const endpoint = API_ENDPOINTS.getUploadLink(providerId)
+    const response = await fetch(`${backendUrl}${endpoint}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

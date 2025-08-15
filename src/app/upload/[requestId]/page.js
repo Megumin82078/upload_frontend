@@ -24,7 +24,7 @@ export default function UploadPage({ params }) {
         <header className="mb-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <h1 className="font-logo text-4xl md:text-5xl font-bold text-black">Fountain</h1>
+              <h1 className="font-logo text-2xl md:text-3xl font-bold text-black">Fountain</h1>
               <div className="hidden md:block h-8 w-px bg-gray-300" />
               <div className="hidden md:block">
                 <p className="text-sm text-gray-500">Healthcare Provider Portal</p>

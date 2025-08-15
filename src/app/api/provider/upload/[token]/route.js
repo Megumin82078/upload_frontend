@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-
-const BACKEND_API_URL = process.env.BACKEND_API_URL || 'http://localhost:8000'
+import { getBackendUrl, isDevMockMode, API_ENDPOINTS } from '@/lib/api-config'
 
 export async function POST(request, { params }) {
   try {
@@ -8,7 +7,7 @@ export async function POST(request, { params }) {
     const formData = await request.formData()
     
     // For testing without backend, simulate successful upload
-    if (BACKEND_API_URL === 'http://localhost:8000') {
+    if (isDevMockMode()) {
       const files = formData.getAll('files')
       
       // Simulate processing delay
@@ -28,7 +27,9 @@ export async function POST(request, { params }) {
     
     // Forward the request to the backend API
     // The backend expects OAuth2PasswordBearer authentication
-    const response = await fetch(`${BACKEND_API_URL}/provider/upload/${token}`, {
+    const backendUrl = getBackendUrl()
+    const endpoint = API_ENDPOINTS.uploadFiles(token)
+    const response = await fetch(`${backendUrl}${endpoint}`, {
       method: 'POST',
       body: formData,
       headers: {
