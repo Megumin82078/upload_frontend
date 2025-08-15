@@ -1,0 +1,4 @@
+{
+  "/upload/[requestId]/page": "app/upload/[requestId]/page.js",
+  "/page": "app/page.js"
+}
